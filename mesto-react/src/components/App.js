@@ -1,5 +1,6 @@
 import Main from "./Main";
 import Header from "./Header";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -7,9 +8,8 @@ function App() {
       <div class="page">
     <Header />
     <Main />
-    <footer class="footer">
-      <div class="footer__copyright">&copy; 2022 Mesto Russia</div>
-    </footer>
+    <Footer />
+    
 
     <div class="popup popup-profile">
       <div class="popup__container">
