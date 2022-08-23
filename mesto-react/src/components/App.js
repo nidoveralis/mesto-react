@@ -46,23 +46,27 @@ function App() {
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
-    console.log('prof')
   };
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
-    console.log('new')
   };
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
 
   return (
     <div className="App">
       <div className="page">
     <Header />
     <Main onEditAvatar = {handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} />
-    <PopupWithForm active = {isEditAvatarPopupOpen} name = {'avatar'} title = {'Обновить аватар'} children = {childrenAvatar}/>
-    <PopupWithForm active = {isEditProfilePopupOpen} name = {'profile'} title = {'Редактировать профиль'} children = {childrenProfile}/>
-    <PopupWithForm active = {isAddPlacePopupOpen} name = {'elements'} title = {'Новое место'} children = {childrenElement}/>
-    <PopupWithForm active = {false} name = {'deleteCard'} title = {'Вы уверены?'} children = {<input type="submit" value="Да" className="popup__button-save popup__button-save_delete" />}/>
+    <PopupWithForm onClose = {closeAllPopups} active = {isEditAvatarPopupOpen} name = {'avatar'} title = {'Обновить аватар'} children = {childrenAvatar}/>
+    <PopupWithForm onClose = {closeAllPopups} active = {isEditProfilePopupOpen} name = {'profile'} title = {'Редактировать профиль'} children = {childrenProfile}/>
+    <PopupWithForm onClose = {closeAllPopups} active = {isAddPlacePopupOpen} name = {'elements'} title = {'Новое место'} children = {childrenElement}/>
+    <PopupWithForm onClose = {closeAllPopups} active = {false} name = {'deleteCard'} title = {'Вы уверены?'} children = {<input type="submit" value="Да" className="popup__button-save popup__button-save_delete" />}/>
     <Footer />
     
     <div className="popup popup-picture">
