@@ -1,6 +1,5 @@
 
 function PopupWithForm({onClose, active, name, title, children}) {
-console.log(onClose);
 
   return(
     <div className = {`${ active ? "popup_opened" : ""} popup  popup-${name}`} >
