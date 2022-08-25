@@ -10,11 +10,11 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   const childrenAvatar = <>
         <fieldset className="popup__field">
-        <input  id="avatar" type="url" className="popup__input popup__input_type_avatar" name="avatar" minLength="2" maxLength="200" required />
+        <input  id="avatar" type="url" className="popup__input popup__input_type_avatar" name="avatar" minLength="2" maxLength="200" placeholder="Ссылка на картинку" required />
         <span className="avatar-error input-error" /> 
         </fieldset>
         <input type="submit" value="Сохранить" className="popup__button-save popup__button-save_avatar" />
@@ -65,7 +65,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsImagePopupOpen(false)
-    setSelectedCard('');
+    setSelectedCard({});
   }
 
   return (
