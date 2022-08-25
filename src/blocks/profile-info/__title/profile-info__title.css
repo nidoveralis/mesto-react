@@ -25,3 +25,9 @@
     padding-bottom: 6px;
   }
 }
+
+@media screen and (min-width: 320px) {
+  .profile-info__title {
+    padding-left: 0px;
+  }
+}
