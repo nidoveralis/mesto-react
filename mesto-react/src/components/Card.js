@@ -4,9 +4,9 @@ function Card({card, openCard}) {
     openCard(card);
   }
   return (
-    <div className="element" onClick={handelCardClick}>
+    <div className="element">
       <button className="element__delete button" type="button" />
-      <img className="element__image" style={{ backgroundImage: `url(${card.link})` }}/>
+      <img className="element__image" style={{ backgroundImage: `url(${card.link})`}} onClick={handelCardClick} />
      <h2 className="element__title">{card.name}</h2>
       <div className="element__like-conteiner">
         <button className="element__like button" type="button" />
