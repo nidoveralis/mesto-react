@@ -3,11 +3,14 @@ import Main from "./Main";
 import Header from "./Header";
 import Footer from "./Footer";
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(false);
 
   const childrenAvatar = <>
         <fieldset className="popup__field">
@@ -52,37 +55,32 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
+  function handleCardClick(card) {
+    setSelectedCard(card)
+    setIsImagePopupOpen(true);
+  };
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsImagePopupOpen(false)
+    setSelectedCard('');
   }
 
   return (
     <div className="App">
       <div className="page">
         <Header />
-        <Main onEditAvatar = {handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} />
+        <Main onEditAvatar = {handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} onCardClick = {handleCardClick} />
         <PopupWithForm onClose = {closeAllPopups} active = {isEditAvatarPopupOpen} name = {'avatar'} title = {'Обновить аватар'} children = {childrenAvatar}/>
         <PopupWithForm onClose = {closeAllPopups} active = {isEditProfilePopupOpen} name = {'profile'} title = {'Редактировать профиль'} children = {childrenProfile}/>
         <PopupWithForm onClose = {closeAllPopups} active = {isAddPlacePopupOpen} name = {'elements'} title = {'Новое место'} children = {childrenElement}/>
         <PopupWithForm onClose = {closeAllPopups} active = {false} name = {'deleteCard'} title = {'Вы уверены?'} children = {<input type="submit" value="Да" className="popup__button-save popup__button-save_delete" />}/>
+        <ImagePopup active = {isImagePopupOpen} onClose = {closeAllPopups} card={selectedCard} />
+
         <Footer />
       </div>
-
-    <template className="add-element">
-      <div className="element">
-        <button className="element__delete button" type="button" />
-        <img className="element__image" />
-        <h2 className="element__title" />
-        <div className="element__like-conteiner">
-          <button className="element__like button" type="button" />
-          <span className="element__like-count" />
-        </div>
-      </div>
-    </template>
-  
-      
     </div>
   );
 }
