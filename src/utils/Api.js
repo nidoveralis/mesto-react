@@ -13,7 +13,7 @@ import config from './utils'
     return res.json();
   };
 
-  getUser() {
+  getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
@@ -61,7 +61,7 @@ import config from './utils'
     .then(res=>this._getResponseData(res))
   };
 
-  addlike(cardId) {
+  changeLikeCardStatus(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
