@@ -15,4 +15,3 @@ function PopupWithForm({onClose, active, name, title, children, onSubmit}) {
 }
 
 export default PopupWithForm;
-//'${ active ? 'popup-opened ' : ''} 

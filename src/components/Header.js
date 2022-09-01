@@ -5,7 +5,6 @@ function Header() {
       <img src={Logo} alt="Логотип" className="header__logo" />
     </header>
   )
-}
+};
 
 export default Header;
-//`<%=require(${Logo})%>`

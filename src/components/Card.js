@@ -37,4 +37,3 @@ function Card({card, openCard, onCardLike, onCardDelete}) {
   )
 };
 export default Card
-//`${ isOwn ? "element__delete_active" : ""} element__delete  popup-button`

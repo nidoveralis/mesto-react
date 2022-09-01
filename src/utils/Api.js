@@ -46,7 +46,7 @@ import config from './utils'
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.title,
+        name: data.name,
         link: data.link
       })
     })
@@ -61,20 +61,21 @@ import config from './utils'
     .then(res=>this._getResponseData(res))
   };
 
-  changeLikeCardStatus(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-    .then(res=>this._getResponseData(res))
-  };
-
-  deleteLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-    .then(res=>this._getResponseData(res))
+  changeLikeCardStatus(cardId, isLike) {
+    if(!isLike){
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: 'DELETE',
+        headers: this._headers
+      })
+      .then(res=>this._getResponseData(res))
+    }else{
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: 'PUT',
+        headers: this._headers
+      })
+      .then(res=>this._getResponseData(res))
+    }
+    
   };
 
   showAvatar() {
@@ -99,5 +100,3 @@ import config from './utils'
 };
 
 export const api = new Api(config);
-//console.log(api)
-//export api;

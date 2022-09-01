@@ -46,4 +46,3 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 }
 
 export default EditProfilePopup;
-//<PopupWithForm onClose = {closeAllPopups} active = {isEditProfilePopupOpen} name = {'profile'} title = {'Редактировать профиль'} children = {childrenProfile}/>
