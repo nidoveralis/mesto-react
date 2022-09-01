@@ -28,7 +28,7 @@ import config from './utils'
     .then(res => this._getResponseData(res))
   };
 
-  editUser(data) {
+  setUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -85,7 +85,7 @@ import config from './utils'
     .then(res=>this._getResponseData(res))
   };
 
-  editAvatar(data) {
+  setUserAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,

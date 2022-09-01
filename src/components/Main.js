@@ -5,10 +5,9 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
-  const [userAvatar, setUserAvatar] = React.useState();
   const [cards, setCards] = React.useState([]);
   const userContext = React.useContext(CurrentUserContext);
-
+  
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === userContext._id);
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -26,9 +25,6 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   };
 
   React.useEffect(() => {
-    api.showAvatar().then(data=>{
-      setUserAvatar(data.avatar)
-    });
     api.getInitialCards().then(data=>{
       setCards(data);
     });
@@ -38,7 +34,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
     <main className="content">
       <section className="profile">
         <div className="profile__edit-avatar" onClick={onEditAvatar} />
-        <div className="profile__avatar" />
+        <div className="profile__avatar" style={{ backgroundImage: `url(${userContext.avatar})` }}  />
         <div className="profile-info">
           <h1 className="profile-info__title">{userContext.name}</h1>
           <button className="profile-info__edit button" type="button"  onClick={onEditProfile} />
@@ -55,5 +51,4 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   )
 }
 
-export default Main; 
-//style={{ backgroundImage: `url(${userAvatar})` }} 
+export default Main;

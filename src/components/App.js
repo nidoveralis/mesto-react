@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import {api} from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -16,13 +17,6 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser,setCurrentUser] = React.useState({});
 
-  const childrenAvatar = <>
-        <fieldset className="popup__field">
-        <input  id="avatar" type="url" className="popup__input popup__input_type_avatar" name="avatar" minLength="2" maxLength="200" placeholder="Ссылка на картинку" required />
-        <span className="avatar-error input-error" /> 
-        </fieldset>
-        <input type="submit" value="Сохранить" className="popup__button-save popup__button-save_avatar" />
-      </>;
   const childrenElement = <>
   <fieldset className="popup__field">
     <input id="name-element-input" type="text" className="popup__input popup__input_type_title" name="title" placeholder="Название" minLength="2" maxLength="30" required />
@@ -34,7 +28,6 @@ function App() {
   </fieldset>
   <input type="submit" value="Создать" className="popup__button-save" />
   </>;
-
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -67,15 +60,28 @@ function App() {
     })
   }, []);
 
+  function handleUpdateUser(user) {
+    api.setUserInfo(user).then(data=>{
+      setCurrentUser(data);
+      closeAllPopups();
+    })
+  };
+
+  function handleUpdateAvatar(avatar) {
+    api.setUserAvatar(avatar).then(data=>{
+      setCurrentUser(data);
+      closeAllPopups();
+    })
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser} >
       <div className="App">
         <div className="page">
           <Header />
           <Main onEditAvatar = {handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} onCardClick = {handleCardClick} />
-          <PopupWithForm onClose = {closeAllPopups} active = {isEditAvatarPopupOpen} name = {'avatar'} title = {'Обновить аватар'} children = {childrenAvatar}/>
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
-          
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} /> 
           <PopupWithForm onClose = {closeAllPopups} active = {isAddPlacePopupOpen} name = {'elements'} title = {'Новое место'} children = {childrenElement}/>
           <PopupWithForm onClose = {closeAllPopups} active = {false} name = {'deleteCard'} title = {'Вы уверены?'} children = {<input type="submit" value="Да" className="popup__button-save popup__button-save_delete" />}/>
           <ImagePopup active = {isImagePopupOpen} onClose = {closeAllPopups} card={selectedCard} />
