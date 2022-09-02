@@ -49,12 +49,14 @@ function App() {
     api.getUserInfo().then(data=>{
       setCurrentUser(data);
     })
+    .catch(e=>console.log(e))
   }, []);
 
   React.useEffect(() => {
     api.getInitialCards().then(data=>{
       setCards(data);
-    });
+    })
+    .catch(e=>console.log(e))
   }, []);
 
   function handleUpdateUser(user) {
@@ -75,7 +77,8 @@ function App() {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    })
+    .catch(e=>console.log(e))
   };
 
   function handleUpdateAddPlace(item) {
@@ -83,12 +86,14 @@ function App() {
       setCards([newCard, ...cards]); 
       closeAllPopups();
     })
+    .catch(e=>console.log(e))
   }
 
   function handleCardDelete(card) {
     api.deleteCard(card._id).then((res) => {
-      setCards(cards.filter(item=>{return (item._id!==card._id)}))
-    });
+      setCards(prevCards=>prevCards.filter(item=>{return (item._id!==card._id)}))
+    })
+    .catch(e=>console.log(e))
   };
 
   return (

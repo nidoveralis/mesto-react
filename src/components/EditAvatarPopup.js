@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
+function EditAvatarPopup({ onClose, isOpen, onUpdateAvatar}) {
 
   const avatarRef = React.createRef();
 
@@ -13,12 +13,16 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
         <input type="submit" value="Сохранить" className="popup__button-save popup__button-save_avatar" />
       </>;
 
-function handleSubmit(e) {
-  e.preventDefault();
-  onUpdateAvatar({
-    avatar: avatarRef.current.value
-  });
-};
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUpdateAvatar({
+      avatar: avatarRef.current.value
+    });
+  };
+
+  React.useEffect(()=>{
+    avatarRef.current.value='';
+  },[isOpen, onClose])
 
   return(
     <>
